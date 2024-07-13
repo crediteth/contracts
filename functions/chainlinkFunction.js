@@ -1,3 +1,6 @@
+// Imports
+const ethers = await import("npm:ethers@6.10.0");
+
 const company = args[0];
 const registrationNumber = company.slice(0, -2);
 
@@ -32,7 +35,7 @@ const res = await Functions.makeHttpRequest({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${access_token}`
     },
-    body: JSON.stringify({
+    data: JSON.stringify({
         registrationNumber,
         segments: [
             "RISK"
@@ -46,5 +49,7 @@ if (!authRes || !authRes.data) {
 
 const rating = authRes.data.risk.creditRatings.currentCreditRating.code;
 
-// TODO: return rating + company
-return Functions.encodeString(rating);
+const abiCoder = new ethers.utils.AbiCoder();
+
+// return company + rating
+return abiCoder.encode(['string', 'string'], [company, score]);

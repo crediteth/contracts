@@ -6,23 +6,21 @@ import path from 'node:path';
 
 import { task } from 'hardhat/config';
 import networks from '../networks';
-import { ethers } from 'hardhat';
 
 task(
   'deploy',
   'Deploys the smart contracts.'
-).setAction(async (taskArgs, { network }) => {
+).setAction(async (taskArgs, { network, ethers }) => {
   try {
     const source = await fs.readFile(
       path.join(__dirname, '../functions/chainlinkFunction.js'),
       { encoding: 'utf8' }
     );
-    console.log(source);
 
-    const Registry = await ethers.getContractFactory('Registry');
-    const registry = await Registry.deploy();
+    // const Registry = await ethers.getContractFactory('Registry');
+    // const registry = await Registry.deploy();
 
-    console.log(`Deployed Registry contract to ${await registry.getAddress()}`);
+    // console.log(`Deployed Registry contract to ${await registry.getAddress()}`);
 
     const CreditScore = await ethers.getContractFactory('CreditScore');
     const creditScore = await CreditScore.deploy(

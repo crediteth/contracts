@@ -7,13 +7,13 @@ import {FunctionsRequest} from "@chainlink/contracts/src/v0.8/functions/v1_0_0/l
 contract CreditScore is FunctionsClient {
     using FunctionsRequest for FunctionsRequest.Request;
 
-    event ScoreUpdated(string company, uint score);
+    event ScoreUpdated(string company, string score);
     event UpdateError(bytes32 indexed requestId, bytes err);
 
     string public chainlinkFunction;
     bytes32 public immutable donId;
     // company = registration number + country code
-    mapping(string => uint) private companyToScore;
+    mapping(string => string) private companyToScore;
     mapping(string => uint) private companyToLastUpdate;
 
     /**
@@ -67,9 +67,9 @@ contract CreditScore is FunctionsClient {
         if (err.length == 0) {
             emit UpdateError(requestId, err);
         } else {
-            (string memory company, uint score) = abi.decode(
+            (string memory company, string memory score) = abi.decode(
                 response,
-                (string, uint)
+                (string, string)
             );
             companyToScore[company] = score;
             companyToLastUpdate[company] = block.timestamp;
