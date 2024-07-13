@@ -32,10 +32,9 @@ describe("Registry", function () {
   describe("Registering", function () {
     it("Should set and get a company", async function () {
       const { registry, owner, otherAccount } = await loadFixture(deploy);
-      await registry.setCompany(otherAccount, [regNumber, countryCode]);
+      await registry.setCompany(otherAccount, regNumber + countryCode);
       const res = await registry.getCompany(otherAccount);
-      expect(res[0]).to.equal(regNumber);
-      expect(res[1]).to.equal(countryCode);
+      expect(await registry.getCompany(otherAccount)).to.equal(regNumber + countryCode);
     });
   });
 });

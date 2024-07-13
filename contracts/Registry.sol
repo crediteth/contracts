@@ -5,20 +5,16 @@ import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Registry is Ownable {
     // TODO: optimize
-    struct Company {
-        uint registrationNumber;
-        string countryCode;
-    }
+    // walletAddress => company (registration number + country code)
+    mapping(address => string) private addressToCompany;
 
-    mapping(address => Company) private addressToCompany;
-
-    event CompanySet(address, Company);
+    event CompanySet(address _companyAddress, string _company);
 
     constructor() Ownable(msg.sender) {}
 
     function setCompany(
         address _address,
-        Company calldata _company
+        string calldata _company
     ) public onlyOwner {
         addressToCompany[_address] = _company;
         emit CompanySet(_address, _company);
@@ -26,10 +22,7 @@ contract Registry is Ownable {
 
     function getCompany(
         address _address
-    ) public view returns (uint, string memory) {
-        return (
-            addressToCompany[_address].registrationNumber,
-            addressToCompany[_address].countryCode
-        );
+    ) public view returns (string memory) {
+        return addressToCompany[_address];
     }
 }
