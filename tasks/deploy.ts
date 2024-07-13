@@ -17,10 +17,10 @@ task(
       { encoding: 'utf8' }
     );
 
-    // const Registry = await ethers.getContractFactory('Registry');
-    // const registry = await Registry.deploy();
+    const Registry = await ethers.getContractFactory('Registry');
+    const registry = await Registry.deploy();
 
-    // console.log(`Deployed Registry contract to ${await registry.getAddress()}`);
+    console.log(`Deployed Registry contract to ${await registry.getAddress()}`);
 
     const CreditScore = await ethers.getContractFactory('CreditScore');
     const creditScore = await CreditScore.deploy(

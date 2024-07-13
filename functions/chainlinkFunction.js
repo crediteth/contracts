@@ -4,10 +4,11 @@ const ethers = await import("npm:ethers@6.10.0");
 const company = args[0];
 const registrationNumber = company.slice(0, -2);
 
-// test creds, use secrets for prod
+// test creds
 const clientId = "3c5f94b7-ade9-43ef-afff-bf0fa33f3127";
 const clientSecret = "tEaBp1X8Qc4Gk4UhM6XWfJKMTRNZQZw7rMZpvHJV955N5iWY824O8K8Umw2G9mVu";
 
+// TODO: move authentication to backend
 const authRes = await Functions.makeHttpRequest({
     method: 'POST',
     url: 'https://login.bisnode.com/sandbox/v1/token.oauth2',
