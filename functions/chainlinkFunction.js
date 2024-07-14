@@ -5,8 +5,8 @@ const company = args[0];
 const registrationNumber = company.slice(0, -2);
 
 const authRes = await Functions.makeHttpRequest({
-    // TODO: replace with live API url and use gist secret for API keys
-    url: 'http://localhost:3000/api/dnbToken'
+    // TODO: use gist secret for API key 
+    url: 'https://credit3.madvil2.me/api/dnbToken'
 })
 
 if (!authRes || !authRes.data) {
