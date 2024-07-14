@@ -77,7 +77,7 @@ contract CreditScore is FunctionsClient {
         }
     }
 
-    function getScore(string calldata _company) public view returns (uint) {
+    function getScore(string calldata _company) public view returns (string memory) {
         return companyToScore[_company];
     }
 

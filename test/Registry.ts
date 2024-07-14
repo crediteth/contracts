@@ -2,7 +2,7 @@ import {
   loadFixture,
 } from "@nomicfoundation/hardhat-toolbox/network-helpers";
 import { expect } from "chai";
-import hre from "hardhat";
+import hre, { ethers } from "hardhat";
 
 const regNumber = 1234;
 const countryCode = "UK";
@@ -32,7 +32,7 @@ describe("Registry", function () {
   describe("Registering", function () {
     it("Should set and get a company", async function () {
       const { registry, owner, otherAccount } = await loadFixture(deploy);
-      await registry.setCompany(otherAccount, regNumber + countryCode);
+      await registry.setCompany(otherAccount, regNumber + countryCode, ethers.encodeBytes32String(""));
       const res = await registry.getCompany(otherAccount);
       expect(await registry.getCompany(otherAccount)).to.equal(regNumber + countryCode);
     });
