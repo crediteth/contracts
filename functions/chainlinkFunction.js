@@ -5,7 +5,7 @@ const company = args[0];
 const registrationNumber = company.slice(0, -2);
 
 const authRes = await Functions.makeHttpRequest({
-    // TODO: replace with live API url
+    // TODO: replace with live API url and use gist secret for API keys
     url: 'http://localhost:3000/api/dnbToken'
 })
 
